@@ -1,2 +1,26 @@
+Rmd to create a survival curve for rack morts data. 
 
+Install and load necessary packages:
+```{r}
+library(survival)
+#install.packages("survminer")
+library(survminer)
+```
+
+
+Read in the data:
+```{r}
+data <- read.csv("../data/oyster-morts.csv")
+head(data)
+```
+
+Create a survival curve with these data using six different colors to represetent the 6 different oyster families (2, 5, 6, 7, 9, 10);
+```{r}
+fit <- survfit(Surv(date, status) ~ oyster.family, data = data)
+```
+
+make the date numeric:
+```{r}
+data$date <- as.numeric(data$date)
+```
 
